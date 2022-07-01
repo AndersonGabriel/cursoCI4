@@ -30,7 +30,7 @@ class BaseConfigTest extends CIUnitTestCase
 
 	public function testBasicValues()
 	{
-		$dotenv = new DotEnv($this->fixturesFolder, '.env');
+		$dotenv = new DotEnv($this->fixturesFolder, '..env');
 		$dotenv->load();
 		$config = new \SimpleConfig();
 
@@ -53,7 +53,7 @@ class BaseConfigTest extends CIUnitTestCase
 			'simpleconfig.shortie' => 123,
 			'SimpleConfig.longie'  => 456,
 		];
-		$dotenv  = new DotEnv($this->fixturesFolder, '.env');
+		$dotenv  = new DotEnv($this->fixturesFolder, '..env');
 		$dotenv->load();
 		$config = new \SimpleConfig();
 
@@ -65,7 +65,7 @@ class BaseConfigTest extends CIUnitTestCase
 
 	public function testEnvironmentOverrides()
 	{
-		$dotenv = new DotEnv($this->fixturesFolder, '.env');
+		$dotenv = new DotEnv($this->fixturesFolder, '..env');
 		$dotenv->load();
 
 		$config = new \SimpleConfig();
@@ -76,7 +76,7 @@ class BaseConfigTest extends CIUnitTestCase
 		$this->assertEquals('three', $config->charlie);
 		// override config with shortPrefix ENV var
 		$this->assertEquals('hubbahubba', $config->delta);
-		// incorrect env name should not inject property
+		// incorrect .env name should not inject property
 		$this->assertObjectNotHasAttribute('notthere', $config);
 		// same ENV var as property, but not namespaced, still over-rides
 		$this->assertEquals('kazaam', $config->bravo);
@@ -92,7 +92,7 @@ class BaseConfigTest extends CIUnitTestCase
 
 	public function testPrefixedValues()
 	{
-		$dotenv = new DotEnv($this->fixturesFolder, '.env');
+		$dotenv = new DotEnv($this->fixturesFolder, '..env');
 		$dotenv->load();
 
 		$config = new \SimpleConfig();
@@ -104,7 +104,7 @@ class BaseConfigTest extends CIUnitTestCase
 
 	public function testPrefixedArrayValues()
 	{
-		$dotenv = new DotEnv($this->fixturesFolder, '.env');
+		$dotenv = new DotEnv($this->fixturesFolder, '..env');
 		$dotenv->load();
 
 		$config = new \SimpleConfig();
@@ -121,7 +121,7 @@ class BaseConfigTest extends CIUnitTestCase
 
 	public function testArrayValues()
 	{
-		$dotenv = new DotEnv($this->fixturesFolder, '.env');
+		$dotenv = new DotEnv($this->fixturesFolder, '..env');
 		$dotenv->load();
 
 		$config = new \SimpleConfig();
@@ -135,7 +135,7 @@ class BaseConfigTest extends CIUnitTestCase
 
 	public function testSetsDefaultValues()
 	{
-		$dotenv = new DotEnv($this->fixturesFolder, 'commented.env');
+		$dotenv = new DotEnv($this->fixturesFolder, 'commented..env');
 		$dotenv->load();
 
 		$config = new \SimpleConfig();
@@ -148,7 +148,7 @@ class BaseConfigTest extends CIUnitTestCase
 
 	public function testRecognizesLooseValues()
 	{
-		$dotenv = new DotEnv($this->fixturesFolder, 'loose.env');
+		$dotenv = new DotEnv($this->fixturesFolder, 'loose..env');
 		$dotenv->load();
 
 		$config = new \SimpleConfig();

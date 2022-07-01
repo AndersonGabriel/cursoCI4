@@ -143,7 +143,7 @@ class IncomingRequestTest extends \CIUnitTestCase
 	public function testCanGrabEnvVars()
 	{
 		$server                = $this->getPrivateProperty($this->request, 'globals');
-		$server['env']['TEST'] = 5;
+		$server['.env']['TEST'] = 5;
 		$this->setPrivateProperty($this->request, 'globals', $server);
 
 		$this->assertEquals(5, $this->request->getEnv('TEST'));

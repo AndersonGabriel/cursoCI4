@@ -24,7 +24,7 @@ class DotEnvTest extends \CIUnitTestCase
 		$this->path           = TESTPATH . 'system/Config/fixtures';
 		vfsStream::copyFromFileSystem($this->path, $this->root);
 
-		$file = 'unreadable.env';
+		$file = 'unreadable..env';
 		$path = rtrim($this->fixturesFolder, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
 		chmod($path, 0644);
 	}
@@ -72,7 +72,7 @@ class DotEnvTest extends \CIUnitTestCase
 
 	public function testCommentedLoadsVars()
 	{
-		$dotenv = new DotEnv($this->fixturesFolder, 'commented.env');
+		$dotenv = new DotEnv($this->fixturesFolder, 'commented..env');
 		$dotenv->load();
 		$this->assertEquals('bar', getenv('CFOO'));
 		$this->assertFalse(getenv('CBAR'));
@@ -87,11 +87,11 @@ class DotEnvTest extends \CIUnitTestCase
 
 	public function testLoadsUnreadableFile()
 	{
-		$file = 'unreadable.env';
+		$file = 'unreadable..env';
 		$path = rtrim($this->fixturesFolder, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $file;
 		chmod($path, 0000);
 		$this->expectException('\InvalidArgumentException');
-		$this->expectExceptionMessage("The .env file is not readable: {$path}");
+		$this->expectExceptionMessage("The ..env file is not readable: {$path}");
 		$dotenv = new DotEnv($this->fixturesFolder, $file);
 		$dotenv->load();
 	}
@@ -100,7 +100,7 @@ class DotEnvTest extends \CIUnitTestCase
 
 	public function testQuotedDotenvLoadsEnvironmentVars()
 	{
-		$dotenv = new Dotenv($this->fixturesFolder, 'quoted.env');
+		$dotenv = new Dotenv($this->fixturesFolder, 'quoted..env');
 		$dotenv->load();
 		$this->assertEquals('bar', getenv('QFOO'));
 		$this->assertEquals('baz', getenv('QBAR'));
@@ -115,9 +115,9 @@ class DotEnvTest extends \CIUnitTestCase
 	public function testSpacedValuesWithoutQuotesThrowsException()
 	{
 		$this->expectException('InvalidArgumentException');
-		$this->expectExceptionMessage('.env values containing spaces must be surrounded by quotes.');
+		$this->expectExceptionMessage('..env values containing spaces must be surrounded by quotes.');
 
-		$dotenv = new Dotenv($this->fixturesFolder, 'spaced-wrong.env');
+		$dotenv = new Dotenv($this->fixturesFolder, 'spaced-wrong..env');
 		$dotenv->load();
 	}
 
@@ -125,7 +125,7 @@ class DotEnvTest extends \CIUnitTestCase
 
 	public function testLoadsServerGlobals()
 	{
-		$dotenv = new Dotenv($this->fixturesFolder, '.env');
+		$dotenv = new Dotenv($this->fixturesFolder, '..env');
 		$dotenv->load();
 
 		$this->assertEquals('bar', $_SERVER['FOO']);
@@ -138,7 +138,7 @@ class DotEnvTest extends \CIUnitTestCase
 
 	public function testNamespacedVariables()
 	{
-		$dotenv = new Dotenv($this->fixturesFolder, '.env');
+		$dotenv = new Dotenv($this->fixturesFolder, '..env');
 		$dotenv->load();
 
 		$this->assertEquals('complex', $_SERVER['simple.name']);
@@ -149,7 +149,7 @@ class DotEnvTest extends \CIUnitTestCase
 	public function testLoadsGetServerVar()
 	{
 		$_SERVER['SER_VAR'] = 'TT';
-		$dotenv             = new Dotenv($this->fixturesFolder, 'nested.env');
+		$dotenv             = new Dotenv($this->fixturesFolder, 'nested..env');
 		$dotenv->load();
 
 		$this->assertEquals('TT', $_ENV['NVAR7']);
@@ -171,7 +171,7 @@ class DotEnvTest extends \CIUnitTestCase
 
 	public function testNestedEnvironmentVars()
 	{
-		$dotenv = new Dotenv($this->fixturesFolder, 'nested.env');
+		$dotenv = new Dotenv($this->fixturesFolder, 'nested..env');
 		$dotenv->load();
 		$this->assertEquals('{$NVAR1} {$NVAR2}', $_ENV['NVAR3']); // not resolved
 		$this->assertEquals('Hello World!', $_ENV['NVAR4']);
@@ -182,7 +182,7 @@ class DotEnvTest extends \CIUnitTestCase
 
 	public function testDotenvAllowsSpecialCharacters()
 	{
-		$dotenv = new Dotenv($this->fixturesFolder, 'specialchars.env');
+		$dotenv = new Dotenv($this->fixturesFolder, 'specialchars..env');
 		$dotenv->load();
 		$this->assertEquals('$a6^C7k%zs+e^.jvjXk', getenv('SPVAR1'));
 		$this->assertEquals('?BUty3koaV3%GA*hMAwH}B', getenv('SPVAR2'));

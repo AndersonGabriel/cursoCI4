@@ -166,7 +166,7 @@ class LoggerTest extends \CIUnitTestCase
 
 		$expected = 'DEBUG - ' . date('Y-m-d') . ' --> Test message ' . ENVIRONMENT;
 
-		$logger->log('debug', 'Test message {env}');
+		$logger->log('debug', 'Test message {.env}');
 
 		$logs = TestHandler::getLogs();
 
@@ -186,7 +186,7 @@ class LoggerTest extends \CIUnitTestCase
 
 		$expected = 'DEBUG - ' . date('Y-m-d') . ' --> Test message bar';
 
-		$logger->log('debug', 'Test message {env:foo}');
+		$logger->log('debug', 'Test message {.env:foo}');
 
 		$logs = TestHandler::getLogs();
 
